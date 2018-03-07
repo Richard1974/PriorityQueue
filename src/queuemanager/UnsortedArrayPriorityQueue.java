@@ -45,7 +45,18 @@ public class UnsortedArrayPriorityQueue<T>implements PriorityQueue<T> {
         if (isEmpty()) {
             throw new QueueUnderflowException();
         } else {
-            return ((PriorityItem<T>) storage[0]).getItem();
+            
+            // Finds the item in the array with the highest priority value
+            int highestPriority = ((PriorityItem<T>) storage[0]).getPriority();
+            int highestPriorityIndex = 0;
+            for (int i = 0; i < tailIndex; i++) {
+                if (((PriorityItem<T>) storage[i]).getPriority() > highestPriority)
+                {
+                    highestPriority = ((PriorityItem<T>) storage[i]).getPriority();
+                    highestPriorityIndex = i;
+                }
+            }
+            return ((PriorityItem<T>) storage[highestPriorityIndex]).getItem();
         }
     }
 
@@ -64,13 +75,29 @@ public class UnsortedArrayPriorityQueue<T>implements PriorityQueue<T> {
     
     @Override
     public void remove() throws QueueUnderflowException {
+        
         if (isEmpty()) {
             throw new QueueUnderflowException();
         } else {
-            /*for (int i = 0; i < tailIndex; i++) {
-                storage[i] = storage[i + 1];
+            // Finds the item in the array with the highest priority value
+            int highestPriority = ((PriorityItem<T>) storage[0]).getPriority();
+            int highestPriorityIndex = 0;
+            for (int i = 0; i < tailIndex; i++) {
+                if (((PriorityItem<T>) storage[i]).getPriority() > highestPriority)
+                {
+                    highestPriority = ((PriorityItem<T>) storage[i]).getPriority();
+                    highestPriorityIndex = i;
+                }
             }
-            tailIndex = tailIndex - 1;*/
+            // starting at the point that the item was removed from it now shifts all items 
+            // after this by 1 space to fill in the gap
+            int i = highestPriorityIndex;
+            while (i<tailIndex){
+            
+                storage[i] = storage[i + 1];
+                i = i + 1;
+            }
+            tailIndex = tailIndex - 1;
         }
     }
     
