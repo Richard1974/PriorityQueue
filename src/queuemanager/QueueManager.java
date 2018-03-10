@@ -36,6 +36,9 @@ public class QueueManager {
                 System.out.println("Using an unsorted array.");
                 break;
             case "sl":
+                q = new SortedLinkedPriorityQueue<>();
+                System.out.println("Using an sorted Link.");
+                break;
             case "ul":
             case "h":
             default:
