@@ -13,13 +13,15 @@ public class UnsortedLinkedPriorityQueue<T> implements PriorityQueue<T> {
     
 private ListNode<T> top;
     private Object storage;
-    private Object topStorage;
+   
     
     ListNode<T> current; 
     private Object currentStorage;
     ListNode<T> previous; 
-    private Object previousStorage;
-    ListNode<T> newNode;
+    
+    ListNode<T> highestNode;
+    private Object highestStorage;
+    ListNode<T>highestPreviousNode;
     
     public UnsortedLinkedPriorityQueue()
     {
@@ -31,11 +33,42 @@ private ListNode<T> top;
     {
         if (isEmpty()) {
             throw new QueueUnderflowException();
-        } else {
-            storage = top.getItem();
-            return ((PriorityItem<T>) storage).getItem();                   
-                      
+        } else 
+        {
+            //storage = top.getItem();
+            //return ((PriorityItem<T>) storage).getItem();                   
+              highestNode = top;
+            current = top.getNext();
+            
+            currentStorage = current.getItem();
+            highestStorage = highestNode.getItem();
+            if (current == null)
+            {
+                System.out.println("current is null and highest is therefore top item" + highestNode + " " +current);
+            }
+            
+            else
+            {
+                while (current != null)
+                {
+                    currentStorage = current.getItem();
+                     
+                    if (((PriorityItem<T>) highestStorage).getPriority() < ((PriorityItem<T>) currentStorage).getPriority())
+                    {
+                        highestPreviousNode = previous;
+                        highestNode = current;
+                        highestStorage = highestNode.getItem();
+                    }
+                        
+                        
+                    previous = current;
+                    current = current.getNext();
+                    
+                }
+            }        
         }
+        storage = highestNode.getItem();
+            return ((PriorityItem<T>) storage).getItem();
     }
     
      @Override
@@ -45,16 +78,76 @@ private ListNode<T> top;
         top = new ListNode<T> ((T) storage, top);
     }
     
-    
-    
     @Override
-    public void remove() throws QueueUnderflowException {
-        if (isEmpty()) {
+    public void remove() throws QueueUnderflowException 
+    {
+        if (isEmpty()) 
+        {
             throw new QueueUnderflowException();
-        } else {
-            top = top.getNext();
-           
+        } else 
+        {
+            highestNode = top;
+            current = top.getNext();
+            
+            currentStorage = current.getItem();
+            highestStorage = highestNode.getItem();
+            if (current == null)
+            {
+                System.out.println("current is null and highest is therefore top item" + highestNode + " " +current);
+            }
+            
+            else
+            {
+                while (current != null)
+                {
+                    currentStorage = current.getItem();
+                     
+                    if (((PriorityItem<T>) highestStorage).getPriority() < ((PriorityItem<T>) currentStorage).getPriority())
+                    {
+                        highestPreviousNode = previous;
+                        highestNode = current;
+                        highestStorage = highestNode.getItem();
+                    }
+                        
+                        
+                    previous = current;
+                    current = current.getNext();
+                    
+                }
+                highestPreviousNode.setNext(highestNode.getNext());
+                
+            }
+            
+                    
         }
+                
+            /*highestNode = top;
+            highestStorage = top.getItem();
+            current = top.getNext();
+            currentStorage = current.getItem();
+            //previous = top;
+            System.out.println("Before WHile Loop current priority" + ((PriorityItem<T>) currentStorage).getPriority() );
+            System.out.println("Before While Loop highest priority" + ((PriorityItem<T>) highestStorage).getPriority() );
+            while (current != null)
+            {
+                if (((PriorityItem<T>) currentStorage).getPriority()  > ((PriorityItem<T>) highestStorage).getPriority())
+                {
+                    highestPreviousNode = previous;
+                    highestNode = current;
+                    //highestStorage = highestNode.getItem();
+                }
+                previous = current;
+                current = current.getNext();
+                System.out.println("current priority" + ((PriorityItem<T>) currentStorage).getPriority() );
+                System.out.println("highest priority" + ((PriorityItem<T>) highestStorage).getPriority() );
+                 
+            }*/
+           // highestStorage = top.getItem();
+           // System.out.println("Highest priority value is " + ((PriorityItem<T>) highestStorage).getPriority());
+           // highestPreviousNode.setNext(current.getNext());
+            
+                       
+        
     }
     
     @Override
