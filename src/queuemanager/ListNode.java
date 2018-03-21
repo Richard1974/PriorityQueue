@@ -29,6 +29,11 @@ public class ListNode<T> {
     {
         return next;
     }
+    public void setNext(ListNode<T> next)
+    {
+        this.next = next;
+        
+    }
     
          
 }

@@ -15,6 +15,12 @@ public class SortedLinkedPriorityQueue<T> implements PriorityQueue<T>{
     private Object storage;
     private Object topStorage;
     
+    ListNode<T> current; 
+    private Object currentStorage;
+    ListNode<T> previous; 
+    private Object previousStorage;
+    ListNode<T> newNode;
+    
     public SortedLinkedPriorityQueue()
     {
         top = null;
@@ -34,12 +40,14 @@ public class SortedLinkedPriorityQueue<T> implements PriorityQueue<T>{
      @Override
     public void add(T item, int priority) throws QueueOverflowException {
        
-    ListNode<T> current;  
+     
+    current = null;
     
-    if (top != null){
-         topStorage = top.getItem();
-    ((PriorityItem<T>) topStorage).getItem(); 
-    System.out.println(((PriorityItem<T>) topStorage).getPriority());
+    if (top != null)
+    {
+        topStorage = top.getItem();
+        ((PriorityItem<T>) topStorage).getItem(); 
+        
     }
    
 
@@ -54,16 +62,19 @@ public class SortedLinkedPriorityQueue<T> implements PriorityQueue<T>{
     else
     {
         current = top;
-        Object currentObject = top.getItem();
+        currentStorage = top.getItem();
 
-        while (current.getNext() != null && ((PriorityItem<T>) currentObject).getPriority() > priority)
+        while (((PriorityItem<T>) currentStorage).getPriority() > priority)
         {
+            previous = current;
             current = current.getNext();
-            currentObject = current.getItem();
         }
+        storage = new PriorityItem<>(item, priority);
+        newNode = new ListNode<T> ((T) storage, current);
+        previous.setNext (newNode);
     }
       
-    }
+}
     
     
     
