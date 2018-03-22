@@ -22,4 +22,5 @@ public class SortedLinkedPriorityQueueTest extends PriorityQueueTest{
         q = new SortedLinkedPriorityQueue<>();
     }
     
+    
 }

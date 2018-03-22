@@ -29,41 +29,62 @@ public abstract class PriorityQueueTest {
      */
     @Test
     public void testIsEmpty() {
-        System.out.println("isEmpty");
+        System.out.println("is the queue empty using isEmpty()");
         boolean expResult = true;
         boolean result = q.isEmpty();
         assertEquals(expResult, result);
         
     }
     
-//
-//    /**
+       /**
 //     * Test of add method, of class PriorityQueue.
 //     */
-//    @Test
-//    public void testAdd() throws Exception {
-//        System.out.println("add");
-//        Object item = null;
-//        int priority = 0;
-//        PriorityQueue instance = new PriorityQueueImpl();
-//        instance.add(item, priority);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
+    @Test
+    public void testAdd() throws Exception {
+        System.out.println("add a person to the queue using .add(person, priority)");
+        Person person = new Person("Richard");
+        int priority = 11;        
+        q.add(person, priority);
+        
+        String expResult = "[(Richard, 11)]";
+        String result = q.toString();
+        assertEquals(expResult, result);
+        
+    }
+    
+  
+     /**
 //     * Test of head method, of class PriorityQueue.
 //     */
-//    @Test
-//    public void testHead() throws Exception {
-//        System.out.println("head");
-//        PriorityQueue instance = new PriorityQueueImpl();
-//        Object expResult = null;
-//        Object result = instance.head();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testHeadOnePerson() throws Exception {
+        
+        System.out.println("Find Head when one person in queue using .head().getName()");
+        Person person = new Person("Richard");
+        int priority = 108;        
+        q.add(person, priority);
+        String expResult = "Richard";
+        String result = q.head().getName();
+        assertEquals(expResult, result);
+    }
+        /**
+//     * Test of head method, of class PriorityQueue.
+//     */
+    @Test
+    public void testHeadTwoPeople() throws Exception {
+        System.out.println("Find Head when two people are in queue using .head().getName()");
+        Person person = new Person("Richard");
+        int priority = 11;        
+        q.add(person, priority);
+        person = new Person("James");
+        priority = 12;
+        q.add(person, priority);
+        String expResult = "James";
+        String result = q.head().getName();
+        assertEquals(expResult, result);
+    }
+    
+
 //
 //    /**
 //     * Test of remove method, of class PriorityQueue.
