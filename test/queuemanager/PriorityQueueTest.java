@@ -38,10 +38,11 @@ public abstract class PriorityQueueTest {
     
        /**
 //     * Test of add method, of class PriorityQueue.
+//     * Add an item to an empty queue
 //     */
     @Test
-    public void testAdd() throws Exception {
-        System.out.println("add a person to the queue using .add(person, priority)");
+    public void testAddEmpty() throws Exception {
+        System.out.println("add a person to an empty queue using .add(person, priority)");
         Person person = new Person("Richard");
         int priority = 11;        
         q.add(person, priority);
@@ -51,6 +52,7 @@ public abstract class PriorityQueueTest {
         assertEquals(expResult, result);
         
     }
+ 
     
   
      /**

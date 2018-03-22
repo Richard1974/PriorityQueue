@@ -84,7 +84,8 @@ private ListNode<T> top;
         if (isEmpty()) 
         {
             throw new QueueUnderflowException();
-        } else 
+        } 
+        else 
         {
             highestNode = top;
             current = top.getNext();

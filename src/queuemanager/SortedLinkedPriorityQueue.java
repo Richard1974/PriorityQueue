@@ -42,14 +42,13 @@ public class SortedLinkedPriorityQueue<T> implements PriorityQueue<T>{
        
      
     current = null;
-    
+    //if top is not null get a reference to it
     if (top != null)
     {
         topStorage = top.getItem();
         ((PriorityItem<T>) topStorage).getItem(); 
         
     }
-   
 
     // if the top item is null or the new item has a higher priority than the 
     // current top item place new item at top
@@ -59,19 +58,30 @@ public class SortedLinkedPriorityQueue<T> implements PriorityQueue<T>{
         top = new ListNode<T> ((T) storage, top);
         
     }  
+    // if priority is lower than current top 
     else
     {
         current = top;
-        currentStorage = top.getItem();
-
-        while (((PriorityItem<T>) currentStorage).getPriority() > priority)
+        
+        
+         while (current != null)
         {
+            currentStorage = current.getItem();
+            System.out.println("current storage = " + ((PriorityItem<T>) currentStorage).getPriority());
+
+            if (((PriorityItem<T>) currentStorage).getPriority() < priority)
+            {
+               // storage = new PriorityItem<>(item, priority);
+                //newNode = new ListNode<T> ((T) storage, current.getNext());
+                //previous.setNext (newNode);
+                System.out.println("hello");
+            }
             previous = current;
             current = current.getNext();
-        }
-        storage = new PriorityItem<>(item, priority);
-        newNode = new ListNode<T> ((T) storage, current);
-        previous.setNext (newNode);
+        
+        
+       
+    }
     }
       
 }
