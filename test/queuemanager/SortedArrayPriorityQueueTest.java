@@ -8,20 +8,20 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Sorted Array Testing
+ *  Sorted Array Testing
  * @author Richard Coldwell
  */
-public class UnsortedArrayPriorityQueueTest extends PriorityQueueTest{
+public class SortedArrayPriorityQueueTest extends PriorityQueueTest{
     
-    public UnsortedArrayPriorityQueueTest() {
+    public SortedArrayPriorityQueueTest() {
     }
     
-   
+    
     
     @Before
     @Override
     public void setUp() {
-        q = new UnsortedArrayPriorityQueue<Person>(8);
+        q = new SortedArrayPriorityQueue<Person>(8);
     }
     
     
