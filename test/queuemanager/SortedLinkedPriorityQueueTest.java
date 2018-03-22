@@ -30,15 +30,16 @@ public class SortedLinkedPriorityQueueTest extends PriorityQueueTest{
     public void testAddEndSorted() throws Exception {
         System.out.println("add a person to the end of a sorted queue using .add(person, priority)");
         Person person = new Person("Richard");
-        int priority = 10;        
+        int priority = 20;        
         q.add(person, priority);
         person = new Person("James");
-        priority = 5;        
+        priority = 11;        
         q.add(person, priority);
         
-        String expResult = "[(Richard, 10), (James, 5)]";
+        String expResult = "[(Richard, 20), (James, 11)]";
         String result = q.toString();
         assertEquals(expResult, result);
+        System.out.println(q.toString());
         
     }
     

@@ -38,16 +38,14 @@ public class SortedLinkedPriorityQueue<T> implements PriorityQueue<T>{
     }
     
      @Override
-    public void add(T item, int priority) throws QueueOverflowException {
-       
-     
+    public void add(T item, int priority) throws QueueOverflowException 
+    {
     current = null;
     //if top is not null get a reference to it
     if (top != null)
     {
         topStorage = top.getItem();
         ((PriorityItem<T>) topStorage).getItem(); 
-        
     }
 
     // if the top item is null or the new item has a higher priority than the 
@@ -58,33 +56,32 @@ public class SortedLinkedPriorityQueue<T> implements PriorityQueue<T>{
         top = new ListNode<T> ((T) storage, top);
         
     }  
-    // if priority is lower than current top 
     else
     {
         current = top;
-        
-        
-         while (current != null)
-        {
-            currentStorage = current.getItem();
-            System.out.println("current storage = " + ((PriorityItem<T>) currentStorage).getPriority());
+        currentStorage = top.getItem();
 
-            if (((PriorityItem<T>) currentStorage).getPriority() < priority)
-            {
-               // storage = new PriorityItem<>(item, priority);
-                //newNode = new ListNode<T> ((T) storage, current.getNext());
-                //previous.setNext (newNode);
-                System.out.println("hello");
-            }
+        while (current != null)
+        {
+                System.out.println("helo !");
+            currentStorage = current.getItem();
+                System.out.println("priority = " + ((PriorityItem<T>) currentStorage).getPriority());
+            if (((PriorityItem<T>) currentStorage).getPriority() < priority) break;
             previous = current;
             current = current.getNext();
+            System.out.println("looopppppp!");
+        }
+     
         
-        
-       
+        storage = new PriorityItem<>(item, priority);
+        newNode = new ListNode<T> ((T) storage, current);
+        previous.setNext (newNode);
     }
-    }
+    }  
+  
+   
       
-}
+
     
     
     
@@ -112,9 +109,6 @@ public class SortedLinkedPriorityQueue<T> implements PriorityQueue<T>{
                 result = result + ", ";
             }
             result += node.getItem();
-            
- 
-                    
         }
         result = result + "]";
         return result;

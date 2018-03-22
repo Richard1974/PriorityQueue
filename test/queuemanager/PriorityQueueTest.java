@@ -86,6 +86,37 @@ public abstract class PriorityQueueTest {
         assertEquals(expResult, result);
     }
     
+    
+       /**
+//     * Test of head method, of class PriorityQueue.
+//     */
+    @Test
+    public void testHeadLotsOfPeople() throws Exception {
+        System.out.println("Find Head when lots people are in queue using .head().getName()");
+        Person person = new Person("Richard");
+        int priority = 11;        
+        q.add(person, priority);
+        person = new Person("James");
+        priority = 12;
+        q.add(person, priority);
+        person = new Person("Gemma");
+        priority = 77;
+        q.add(person, priority);
+        person = new Person("Natasha");
+        priority = 45;
+        q.add(person, priority);
+        person = new Person("Ann");
+        priority = 5;
+        q.add(person, priority);
+        person = new Person("Malcolm");
+        priority = 34;
+        q.add(person, priority);
+        String expResult = "Gemma";
+        String result = q.head().getName();
+        assertEquals(expResult, result);
+    }
+    
+
 
 //
 //    /**
