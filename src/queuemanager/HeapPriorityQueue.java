@@ -30,6 +30,7 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
      */
     public HeapPriorityQueue(int capacity) 
     {
+        size = 0;
         heap = new Object[capacity];
     }
 
@@ -43,11 +44,30 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
             throw new QueueOverflowException();
         }
         heap[size] = new PriorityItem<>(item, priority);
-        fixHeapAbove(size);
+        fixHeapSortUp(size);
         size++;
     }
     
-    private void fixHeapAbove(int index)
+    
+    
+    @Override
+    public void remove() throws QueueUnderflowException 
+    {
+       
+        if (isEmpty()) 
+        {
+            throw new QueueUnderflowException();
+        } 
+        else 
+        {
+            fixHeapSortDown(0, size-1);
+            size--;
+        }
+        
+    
+    }
+    
+    private void fixHeapSortUp(int index)
     {   
         Object newObject = ((PriorityItem<T>) heap[index]);
         int newValue = ((PriorityItem<T>) heap[index]).getPriority();
@@ -58,6 +78,50 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
         }
         heap[index] = newObject;
     }
+    
+    private void fixHeapSortDown(int index, int lastHeapIndex)
+    {  
+        
+        int childToSwap;
+        while (index <= lastHeapIndex)
+        {
+            int leftChild = getChild(index, true);
+            int rightChild = getChild(index, false);
+            
+            if (leftChild <= lastHeapIndex)
+            {
+                if (rightChild > lastHeapIndex)//if no right child need to swap left child
+                {
+                    childToSwap = leftChild;
+                    
+                }
+                else //check which child is highest priority value if there are 2 children
+                {
+                    childToSwap = (((PriorityItem<T>) heap[leftChild]).getPriority() > ((PriorityItem<T>) heap[rightChild]).getPriority() ? leftChild : rightChild);
+                }
+            
+                if (((PriorityItem<T>) heap[index]).getPriority() > ((PriorityItem<T>) heap[childToSwap]).getPriority())
+                {
+                    Object tmp = heap[index];
+                    heap[index] = heap[childToSwap];
+                    heap[childToSwap] = tmp;
+                    
+                }
+                else
+                {
+                    break;
+                }
+                index = childToSwap;
+                
+                
+            }
+            else
+            {
+                break;
+            }
+        }
+    
+    }
 
     
 
@@ -66,15 +130,19 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
         return size == 0;
     }
     
-    public boolean isFull() {
+    public boolean isFull() 
+    {
         return size == heap.length;
-        
     }
-    
     
     public int getParent(int index)
     {
         return (index  - 1) / 2;
+    }
+    
+    public int getChild(int index, boolean left)
+    {
+        return 2 * index + (left? 1 : 2);
     }
 //*****************************************************
     @Override
@@ -86,11 +154,7 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
         }
     }
     
-    @Override
-    public void remove() throws QueueUnderflowException {
-        
     
-    }
     @Override
     public String toString() {
         String result = "[";
