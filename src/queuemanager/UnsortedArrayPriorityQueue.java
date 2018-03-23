@@ -49,7 +49,7 @@ public class UnsortedArrayPriorityQueue<T>implements PriorityQueue<T> {
             // Finds the item in the array with the highest priority value
             int highestPriority = ((PriorityItem<T>) storage[0]).getPriority();
             int highestPriorityIndex = 0;
-            for (int i = 0; i < tailIndex; i++) {
+            for (int i = 0; i <= tailIndex; i++) {
                 if (((PriorityItem<T>) storage[i]).getPriority() > highestPriority)
                 {
                     highestPriority = ((PriorityItem<T>) storage[i]).getPriority();
@@ -82,7 +82,7 @@ public class UnsortedArrayPriorityQueue<T>implements PriorityQueue<T> {
             // Finds the item in the array with the highest priority value
             int highestPriority = ((PriorityItem<T>) storage[0]).getPriority();
             int highestPriorityIndex = 0;
-            for (int i = 0; i < tailIndex; i++) {
+            for (int i = 0; i <= tailIndex; i++) {
                 if (((PriorityItem<T>) storage[i]).getPriority() > highestPriority)
                 {
                     highestPriority = ((PriorityItem<T>) storage[i]).getPriority();
