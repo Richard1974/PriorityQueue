@@ -37,10 +37,10 @@ private ListNode<T> top;
         {
             //storage = top.getItem();
             //return ((PriorityItem<T>) storage).getItem();                   
-              highestNode = top;
+            highestNode = top;
             current = top.getNext();
             
-            currentStorage = current.getItem();
+            //currentStorage = current.getItem();
             highestStorage = highestNode.getItem();
             if (current == null)
             {
@@ -90,11 +90,12 @@ private ListNode<T> top;
             highestNode = top;
             current = top.getNext();
             
-            currentStorage = current.getItem();
+            //currentStorage = current.getItem();
             highestStorage = highestNode.getItem();
             if (current == null)
             {
-                System.out.println("current is null and highest is therefore top item" + highestNode + " " +current);
+                top = null;
+                
             }
             
             else
