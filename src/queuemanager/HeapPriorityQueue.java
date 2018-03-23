@@ -14,31 +14,69 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
     /**
      * Where the data is actually stored.
      */
-    private final Object[] storage;
+    private  Object[] heap;
 
     /**
      * The size of the storage array.
      */
-    private final int capacity;
-
-    /**
-     * The index of the last item stored.
-     *
-     * This is equal to the item count minus one.
-     */
-    private int tailIndex;
+    private int size;
+    
+    
 
     /**
      * Create a new empty queue of the given size.
      *
-     * @param size
+     * @param capacity
      */
-    public HeapPriorityQueue(int size) {
-        storage = new Object[size];
-        capacity = size;
-        tailIndex = -1;
+    public HeapPriorityQueue(int capacity) 
+    {
+        heap = new Object[capacity];
     }
 
+    
+
+   @Override
+    public void add(T item, int priority) throws QueueOverflowException 
+    {
+        if (isFull())
+        {
+            throw new QueueOverflowException();
+        }
+        heap[size] = new PriorityItem<>(item, priority);
+        fixHeapAbove(size);
+        size++;
+    }
+    
+    private void fixHeapAbove(int index)
+    {   
+        Object newObject = ((PriorityItem<T>) heap[index]);
+        int newValue = ((PriorityItem<T>) heap[index]).getPriority();
+        while (index > 0 && newValue > ((PriorityItem<T>) heap[getParent(index)]).getPriority())
+        {
+            heap[index] = heap[getParent(index)];
+            index = getParent(index);
+        }
+        heap[index] = newObject;
+    }
+
+    
+
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+    
+    public boolean isFull() {
+        return size == heap.length;
+        
+    }
+    
+    
+    public int getParent(int index)
+    {
+        return (index  - 1) / 2;
+    }
+//*****************************************************
     @Override
     public T head() throws QueueUnderflowException {
         if (isEmpty()) {
@@ -47,38 +85,20 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
             return null;
         }
     }
-
-   @Override
-    public void add(T item, int priority) throws QueueOverflowException {
-        tailIndex = tailIndex + 1;
-        if (tailIndex >= capacity) {
-            /* No resizing implemented, but that would be a good enhancement. */
-            tailIndex = tailIndex - 1;
-            throw new QueueOverflowException();
-        } else {
-            storage[tailIndex] = new PriorityItem<>(item, priority);
-        }
-    }
-
+    
     @Override
     public void remove() throws QueueUnderflowException {
         
     
     }
-
-    @Override
-    public boolean isEmpty() {
-        return tailIndex < 0;
-    }
-
     @Override
     public String toString() {
         String result = "[";
-        for (int i = 0; i <= tailIndex; i++) {
+        for (int i = 0; i < size; i++) {
             if (i > 0) {
                 result = result + ", ";
             }
-            result = result + storage[i];
+            result = result + heap[i];
         }
         result = result + "]";
         return result;

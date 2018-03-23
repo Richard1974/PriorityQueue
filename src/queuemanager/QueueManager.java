@@ -46,6 +46,7 @@ public class QueueManager {
             case "h":
                 q = new HeapPriorityQueue<>(8);
                 System.out.println("Using a Heap.");
+                break;
             default:
                 q = new SortedArrayPriorityQueue<>(8);
                 System.out.println("Invalid choice, using sorted array.");
