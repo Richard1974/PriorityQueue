@@ -95,7 +95,6 @@ private ListNode<T> top;
             if (current == null)
             {
                 top = null;
-                
             }
             
             else
