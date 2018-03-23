@@ -144,13 +144,13 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
     {
         return 2 * index + (left? 1 : 2);
     }
-//*****************************************************
-    @Override
+
+     @Override
     public T head() throws QueueUnderflowException {
         if (isEmpty()) {
             throw new QueueUnderflowException();
         } else {
-            return null;
+            return ((PriorityItem<T>) heap[0]).getItem();
         }
     }
     

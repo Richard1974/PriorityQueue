@@ -92,8 +92,8 @@ public class QueueManager {
 
                 /* Remove the item at the head of the queue */
                 try {
-                    //String name = q.head().getName();
-                    //System.out.println("Removing " + name + " from the head of the queue");
+                    String name = q.head().getName();
+                    System.out.println("Removing " + name + " from the head of the queue");
                     q.remove();
                 } catch (QueueUnderflowException e) {
                     System.out.println("Can't remove head of queue: " + e);
