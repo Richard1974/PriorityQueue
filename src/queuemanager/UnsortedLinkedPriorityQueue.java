@@ -88,8 +88,9 @@ private ListNode<T> top;
         else 
         {
             highestNode = top;
-            current = top.getNext();
-            
+            current = highestNode.getNext();
+            highestPreviousNode  = null;
+            previous = top;
             highestStorage = highestNode.getItem();
             if (current == null)
             {
@@ -110,11 +111,13 @@ private ListNode<T> top;
                     previous = current;
                     current = current.getNext();
                 }
-                if (highestPreviousNode != null){
-                highestPreviousNode.setNext(highestNode.getNext());
-            }else
+                if (highestPreviousNode != null)
                 {
-                    previous.setNext(null);
+                highestPreviousNode.setNext(highestNode.getNext());
+                }
+                else
+                {
+                   top = highestNode.getNext();
                 }
                 
             }
