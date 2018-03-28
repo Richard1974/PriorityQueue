@@ -63,13 +63,12 @@ public class SortedLinkedPriorityQueue<T> implements PriorityQueue<T>{
 
         while (current != null)
         {
-                System.out.println("helo !");
             currentStorage = current.getItem();
-                System.out.println("priority = " + ((PriorityItem<T>) currentStorage).getPriority());
+                
             if (((PriorityItem<T>) currentStorage).getPriority() < priority) break;
             previous = current;
             current = current.getNext();
-            System.out.println("looopppppp!");
+            
         }
      
         

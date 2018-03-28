@@ -22,46 +22,47 @@ public abstract class PriorityQueueTest {
     @Before
     public abstract void setUp();
     
+       
+    //************************************************************
+    //***  BLACK BOX TESTING RELEVANT TO ALL IMPLEMENTATIONS   ***
+    //************************************************************
     
+    //*******************************************
+    //** isEmpty() Tests                       **
+    //*******************************************
     
-    /**
-     * Test of isEmpty method, of class PriorityQueue.
-     */
+    //** isEmpty() Blackbox Test 01
+    //*  Will return True if the queue is Empty
     @Test
-    public void testIsEmpty() {
+    public void bbTestIsEmpty() 
+    {
         System.out.println("is the queue empty using isEmpty()");
         boolean expResult = true;
         boolean result = q.isEmpty();
         assertEquals(expResult, result);
-        
     }
     
-       /**
-//     * Test of add method, of class PriorityQueue.
-//     * Add an item to an empty queue
-//     */
-    @Test
-    public void testAddEmpty() throws Exception {
-        System.out.println("add a person to an empty queue using .add(person, priority)");
-        Person person = new Person("Richard");
-        int priority = 11;        
-        q.add(person, priority);
-        
-        String expResult = "[(Richard, 11)]";
-        String result = q.toString();
+    //*******************************************
+    //** head() Tests                          **
+    //******************************************* 
+     
+    //** head() Blackbox Test 01
+    //*  Will throw exception if queue is empty
+    @Test(expected = QueueUnderflowException.class) 
+    public void bbTestHeadEmpty() throws Exception 
+    {
+        System.out.println("Find Head when queue is Empty");
+        String expResult = "Queue is empty";
+        String result = q.head().getName();
         assertEquals(expResult, result);
-        
     }
- 
-    
   
-     /**
-//     * Test of head method, of class PriorityQueue.
-//     */
+    //** head() Blackbox Test 02
+    //** Will display name at head of a queue containing 1 item
     @Test
-    public void testHeadOnePerson() throws Exception {
-        
-        System.out.println("Find Head when one person in queue using .head().getName()");
+    public void bbTestHeadOnePerson() throws Exception 
+    {
+        System.out.println("Find Head when one person in queue");
         Person person = new Person("Richard");
         int priority = 108;        
         q.add(person, priority);
@@ -69,12 +70,13 @@ public abstract class PriorityQueueTest {
         String result = q.head().getName();
         assertEquals(expResult, result);
     }
-        /**
-//     * Test of head method, of class PriorityQueue.
-//     */
+    
+    //** head() Blackbox Test 03
+    //** Will display name at head of a queue containing 2 items
     @Test
-    public void testHeadTwoPeople() throws Exception {
-        System.out.println("Find Head when two people are in queue using .head().getName()");
+    public void bbTestHeadTwoPeople() throws Exception 
+    {
+        System.out.println("Find Head when two people are in queue");
         Person person = new Person("Richard");
         int priority = 11;        
         q.add(person, priority);
@@ -87,12 +89,11 @@ public abstract class PriorityQueueTest {
     }
     
     
-       /**
-//     * Test of head method, of class PriorityQueue.
-//     */
+    //** head() Blackbox Test 04
+    //** Will display name at head of a queue containing 7 items
     @Test
-    public void testHeadLotsOfPeople() throws Exception {
-        System.out.println("Find Head when lots people are in queue using .head().getName()");
+    public void bbTestHeadLotsOfPeople() throws Exception {
+        System.out.println("Find Head when lots people are in queue");
         Person person = new Person("Richard");
         int priority = 11;        
         q.add(person, priority);
@@ -116,56 +117,53 @@ public abstract class PriorityQueueTest {
         assertEquals(expResult, result);
     }
     
-
-
-//
-//    /**
-//     * Test of remove method, of class PriorityQueue.
-//     */
-//    @Test
-//    public void testRemove() throws Exception {
-//        System.out.println("remove");
-//        PriorityQueue instance = new PriorityQueueImpl();
-//        instance.remove();
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    
-//
-//    /**
-//     * Test of toString method, of class PriorityQueue.
-//     */
-//    @Test
-//    public void testToString() {
-//        System.out.println("toString");
-//        PriorityQueue instance = new PriorityQueueImpl();
-//        String expResult = "";
-//        String result = instance.toString();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    public class PriorityQueueImpl implements PriorityQueue {
-//
-//        public void add(T item, int priority) throws QueueOverflowException {
-//        }
-//
-//        public T head() throws QueueUnderflowException {
-//            return null;
-//        }
-//
-//        public void remove() throws QueueUnderflowException {
-//        }
-//
-//        public boolean isEmpty() {
-//            return false;
-//        }
-//
-//        public String toString() {
-//            return "";
-//        }
-//    }
+    //*******************************************
+    //** add() Tests                          **
+    //******************************************* 
+     
+    //** add() Blackbox Test 01
+    //*  adds 1 person to an empty queue
+    @Test
+    public void bbTestAddEmpty() throws Exception 
+    {
+        System.out.println("add a person to an empty queue");
+        Person person = new Person("Richard");
+        int priority = 88;        
+        q.add(person, priority);
+        String expResult = "[(Richard, 88)]";
+        String result = q.toString();
+        assertEquals(expResult, result);
+    }
     
+    //*******************************************
+    //** remove() Tests                        **
+    //******************************************* 
+     
+    //** remove() Blackbox Test 01
+    //*  removes 1 person from a queue of 1
+    @Test
+    public void bbRemoveFromQueueOfOne() throws Exception 
+    {
+        System.out.println("remove a person from a queue of 1 person");
+        Person person = new Person("Richard");
+        int priority = 88;        
+        q.add(person, priority);
+        q.remove();
+        boolean expResult = true;
+        boolean result = q.isEmpty();
+        assertEquals(expResult, result);
+    }
+    
+     //** remove() Blackbox Test 02
+    //*  removes 1 person from an empty queue
+    @Test (expected = QueueUnderflowException.class)
+    public void bbRemoveFromEmptyQueue() throws Exception 
+    {
+        System.out.println("remove a person from an empty queue");
+        q.remove();
+        boolean expResult = true;
+        boolean result = q.isEmpty();
+        assertEquals(expResult, result);
+    }
+
 }
