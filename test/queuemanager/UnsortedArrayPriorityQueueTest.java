@@ -93,7 +93,7 @@ public class UnsortedArrayPriorityQueueTest extends PriorityQueueTest{
     }
     
     //** add() WhiteBox Test 04
-    //** add 5 people to queue in mixed order of priority and check they are ordered correctly
+    //** add 9 people to queue in mixed order of priority and check exception thrown
     @Test (expected = QueueOverflowException.class)
     public void wbTestAddMoreThanArraySize() throws Exception 
     {

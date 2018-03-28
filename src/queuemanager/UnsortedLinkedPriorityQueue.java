@@ -71,7 +71,7 @@ private ListNode<T> top;
             return ((PriorityItem<T>) storage).getItem();
     }
     
-     @Override
+    @Override
     public void add(T item, int priority) throws QueueOverflowException 
     {
         storage = new PriorityItem<>(item, priority);
@@ -90,13 +90,11 @@ private ListNode<T> top;
             highestNode = top;
             current = top.getNext();
             
-            //currentStorage = current.getItem();
             highestStorage = highestNode.getItem();
             if (current == null)
             {
                 top = null;
             }
-            
             else
             {
                 while (current != null)
@@ -108,14 +106,16 @@ private ListNode<T> top;
                         highestPreviousNode = previous;
                         highestNode = current;
                         highestStorage = highestNode.getItem();
-                    }
-                        
-                        
+                    } 
                     previous = current;
                     current = current.getNext();
-                    
                 }
+                if (highestPreviousNode != null){
                 highestPreviousNode.setNext(highestNode.getNext());
+            }else
+                {
+                    previous.setNext(null);
+                }
                 
             }
             
