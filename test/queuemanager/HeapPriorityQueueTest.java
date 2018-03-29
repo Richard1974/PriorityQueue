@@ -13,15 +13,15 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author coldw
+ * Heap Testing
+ * @author Richard Coldwell
  */
 public class HeapPriorityQueueTest extends PriorityQueueTest{
     
     public HeapPriorityQueueTest() {
     }
     
-   @Before
+    @Before
     @Override
     public void setUp() {
         q = new HeapPriorityQueue<>(8);
@@ -140,12 +140,10 @@ public class HeapPriorityQueueTest extends PriorityQueueTest{
         person = new Person("Keith");
         priority = 16;        
         q.add(person, priority);
-        
         String expResult = "[(Gemma, 19), (Helen, 17), (Keith, 16), (Natasha, 7), (Richard, 15), (James, 10)]";
         String result = q.toString();
         assertEquals(expResult, result);
     }
-    
     
     
     //*******************************************

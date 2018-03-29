@@ -1,17 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package queuemanager;
 
 /**
- *
- * @author coldw
+ * Unsorted Linked Priority Queue
+ * @author Richard Coldwell
  */
-public class UnsortedLinkedPriorityQueue<T> implements PriorityQueue<T> {
+public class UnsortedLinkedPriorityQueue<T> implements PriorityQueue<T> 
+{
     
-private ListNode<T> top;
+    private ListNode<T> top;
     private Object storage;
    
     
@@ -34,36 +30,27 @@ private ListNode<T> top;
         if (isEmpty()) {
             throw new QueueUnderflowException();
         } else 
-        {
-            //storage = top.getItem();
-            //return ((PriorityItem<T>) storage).getItem();                   
+        {                   
             highestNode = top;
             current = top.getNext();
-            
-            //currentStorage = current.getItem();
             highestStorage = highestNode.getItem();
             if (current == null)
             {
                 System.out.println("current is null and highest is therefore top item" + highestNode + " " +current);
             }
-            
             else
             {
                 while (current != null)
                 {
                     currentStorage = current.getItem();
-                     
                     if (((PriorityItem<T>) highestStorage).getPriority() < ((PriorityItem<T>) currentStorage).getPriority())
                     {
                         highestPreviousNode = previous;
                         highestNode = current;
                         highestStorage = highestNode.getItem();
                     }
-                        
-                        
                     previous = current;
                     current = current.getNext();
-                    
                 }
             }        
         }
@@ -119,61 +106,28 @@ private ListNode<T> top;
                 {
                    top = highestNode.getNext();
                 }
-                
-            }
-            
-                    
+            }      
         }
-                
-            /*highestNode = top;
-            highestStorage = top.getItem();
-            current = top.getNext();
-            currentStorage = current.getItem();
-            //previous = top;
-            System.out.println("Before WHile Loop current priority" + ((PriorityItem<T>) currentStorage).getPriority() );
-            System.out.println("Before While Loop highest priority" + ((PriorityItem<T>) highestStorage).getPriority() );
-            while (current != null)
-            {
-                if (((PriorityItem<T>) currentStorage).getPriority()  > ((PriorityItem<T>) highestStorage).getPriority())
-                {
-                    highestPreviousNode = previous;
-                    highestNode = current;
-                    //highestStorage = highestNode.getItem();
-                }
-                previous = current;
-                current = current.getNext();
-                System.out.println("current priority" + ((PriorityItem<T>) currentStorage).getPriority() );
-                System.out.println("highest priority" + ((PriorityItem<T>) highestStorage).getPriority() );
-                 
-            }*/
-           // highestStorage = top.getItem();
-           // System.out.println("Highest priority value is " + ((PriorityItem<T>) highestStorage).getPriority());
-           // highestPreviousNode.setNext(current.getNext());
-            
-                       
-        
     }
     
     @Override
-    public boolean isEmpty() {
+    public boolean isEmpty() 
+    {
         return top == null;
     }
     
     @Override
     public String toString() {
         String result = "[";
-       for (ListNode<T> node = top; node != null; node = node.getNext()) 
-       {
-            if (node != top) {
+        for (ListNode<T> node = top; node != null; node = node.getNext()) 
+        {
+            if (node != top) 
+            {
                 result = result + ", ";
             }
             result += node.getItem();
-            
- 
-                    
         }
         result = result + "]";
         return result;
     }
-    
 }

@@ -16,14 +16,12 @@ public class SortedArrayPriorityQueueTest extends PriorityQueueTest{
     public SortedArrayPriorityQueueTest() {
     }
     
-    
-    
     @Before
     @Override
-    public void setUp() {
+    public void setUp() 
+    {
         q = new SortedArrayPriorityQueue<Person>(8);
     }
-    
     
     //************************************************************
     //***  WHITE BOX TESTING RELEVANT TO THIS IMPLEMENTATION   ***
@@ -130,9 +128,7 @@ public class SortedArrayPriorityQueueTest extends PriorityQueueTest{
         String result = q.toString();
         assertEquals(expResult, result);
     }
-    
-    
-    
+        
     //*******************************************
     //** remove() Tests                        **
     //******************************************* 

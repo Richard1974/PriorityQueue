@@ -91,8 +91,6 @@ public class SortedLinkedPriorityQueueTest extends PriorityQueueTest{
     }
     
      
-    
-    
     //*******************************************
     //** remove() Tests                        **
     //******************************************* 

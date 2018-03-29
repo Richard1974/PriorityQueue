@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package queuemanager;
 
 /**
- *
- * @author Richar coldwell
+ * Unsorted Array Priority Queue
+ * @author Richard coldwell
  */
 public class UnsortedArrayPriorityQueue<T>implements PriorityQueue<T> {
     
@@ -33,7 +28,8 @@ public class UnsortedArrayPriorityQueue<T>implements PriorityQueue<T> {
      *
      * @param size
      */
-    public UnsortedArrayPriorityQueue(int size) {
+    public UnsortedArrayPriorityQueue(int size) 
+    {
         storage = new Object[size];
         capacity = size;
         tailIndex = -1;
@@ -41,7 +37,8 @@ public class UnsortedArrayPriorityQueue<T>implements PriorityQueue<T> {
     
     
     @Override
-    public T head() throws QueueUnderflowException {
+    public T head() throws QueueUnderflowException 
+    {
         if (isEmpty()) {
             throw new QueueUnderflowException();
         } else {
@@ -72,7 +69,6 @@ public class UnsortedArrayPriorityQueue<T>implements PriorityQueue<T> {
         }
     }
     
-    
     @Override
     public void remove() throws QueueUnderflowException {
         
@@ -100,8 +96,6 @@ public class UnsortedArrayPriorityQueue<T>implements PriorityQueue<T> {
             tailIndex = tailIndex - 1;
         }
     }
-    
-    
     
     @Override
     public boolean isEmpty() {

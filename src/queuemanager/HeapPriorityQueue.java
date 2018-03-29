@@ -6,8 +6,8 @@
 package queuemanager;
 
 /**
- *
- * @author coldw
+ * Heap Priority Queue 
+ * @author Richard Coldwell
  */
 public class HeapPriorityQueue<T> implements PriorityQueue<T> {
     
@@ -20,7 +20,6 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
      * The size of the storage array.
      */
     private int size;
-    
     
 
     /**
@@ -35,8 +34,8 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
     }
 
     
-
-   @Override
+    // Adds and item to the heap if heap array is full throws exception
+    @Override
     public void add(T item, int priority) throws QueueOverflowException 
     {
         if (isFull())
@@ -44,31 +43,28 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
             throw new QueueOverflowException();
         }
         heap[size] = new PriorityItem<>(item, priority);
-        fixHeapSortUp(size);
+        fixHeapSortUp(size);//called to sort the heap after adding new item
         size++;
-        
     }
     
     
-    
+    //removes item at top of heap if heap empty throws exception
     @Override
     public void remove() throws QueueUnderflowException 
     {
-       
         if (isEmpty()) 
         {
             throw new QueueUnderflowException();
         } 
         else 
         {
-            heap[0] = heap[size-1];
-            fixHeapSortDown(0, size-1);
-            size--;
+            heap[0] = heap[size-1];//moves last item to top of heap 
+            fixHeapSortDown(0, size-1);//called to sort heap starting at the top
+            size--;// reduce size of heap by 1 now item has been removed
         }
-        
-    
     }
     
+    //used to sort heap after item has been added to queue
     private void fixHeapSortUp(int index)
     {   
         Object newObject = ((PriorityItem<T>) heap[index]);
@@ -81,13 +77,12 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
         heap[index] = newObject;
     }
     
+    //used to sort heap after item has been deleted from top of heap
     private void fixHeapSortDown(int index, int lastHeapIndex)
     {  
-        
         int childToSwap;
         while (index <= lastHeapIndex)
         {
-            
             int leftChild = getChild(index, true);
             int rightChild = getChild(index, false);
             
@@ -103,7 +98,7 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
                     childToSwap = (((PriorityItem<T>) heap[leftChild]).getPriority() > ((PriorityItem<T>) heap[rightChild]).getPriority() ? leftChild : rightChild);
                     
                 }
-             
+                //swaps the objects if the child has a higher priority than the parent
                 if (((PriorityItem<T>) heap[index]).getPriority() < ((PriorityItem<T>) heap[childToSwap]).getPriority())
                 {
                     Object tmp = heap[index];
@@ -115,40 +110,40 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
                     break;
                 }
                 index = childToSwap;
-                
-                
             }
             else
             {
                 break;
             }
         }
-    
     }
 
-    
-
+    // called to check if empty
     @Override
     public boolean isEmpty() {
         return size == 0;
     }
     
+    //called to check if full
     public boolean isFull() 
     {
         return size == heap.length;
     }
     
+    //gets the parent of the object
     public int getParent(int index)
     {
         return (index  - 1) / 2;
     }
     
+    //gets the child and whether it is left child or not 
     public int getChild(int index, boolean left)
     {
         return 2 * index + (left? 1 : 2);
     }
 
-     @Override
+    //returns item at top of queue
+    @Override
     public T head() throws QueueUnderflowException {
         if (isEmpty()) {
             throw new QueueUnderflowException();
@@ -156,7 +151,6 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
             return ((PriorityItem<T>) heap[0]).getItem();
         }
     }
-    
     
     @Override
     public String toString() {
