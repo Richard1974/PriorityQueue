@@ -46,6 +46,7 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
         heap[size] = new PriorityItem<>(item, priority);
         fixHeapSortUp(size);
         size++;
+        
     }
     
     
@@ -60,6 +61,7 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
         } 
         else 
         {
+            heap[0] = heap[size-1];
             fixHeapSortDown(0, size-1);
             size--;
         }
@@ -85,6 +87,7 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
         int childToSwap;
         while (index <= lastHeapIndex)
         {
+            
             int leftChild = getChild(index, true);
             int rightChild = getChild(index, false);
             
@@ -98,14 +101,14 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T> {
                 else //check which child is highest priority value if there are 2 children
                 {
                     childToSwap = (((PriorityItem<T>) heap[leftChild]).getPriority() > ((PriorityItem<T>) heap[rightChild]).getPriority() ? leftChild : rightChild);
+                    
                 }
-            
-                if (((PriorityItem<T>) heap[index]).getPriority() > ((PriorityItem<T>) heap[childToSwap]).getPriority())
+             
+                if (((PriorityItem<T>) heap[index]).getPriority() < ((PriorityItem<T>) heap[childToSwap]).getPriority())
                 {
                     Object tmp = heap[index];
                     heap[index] = heap[childToSwap];
                     heap[childToSwap] = tmp;
-                    
                 }
                 else
                 {
